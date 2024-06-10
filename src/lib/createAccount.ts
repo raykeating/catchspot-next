@@ -1,17 +1,11 @@
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
+import { Angler } from "@/types/Angler";
 
 export default async function createAccount({
 	user,
 }: {
-	user: {
-		email: string;
-		password: string;
-		firstName: string;
-		lastName: string;
-		profilePicture: string;
-		bio: string;
-	};
+	user: Angler;
 }) {
 	const response = await fetch(
 		`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/auth/local/register`,

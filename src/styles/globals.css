@@ -21,3 +21,7 @@
 .btn.secondary:hover {
   @apply bg-slate-100;
 }
+
+option {
+  font-family: "Inter", sans-serif;
+}
