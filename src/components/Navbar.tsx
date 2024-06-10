@@ -1,8 +1,10 @@
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
+import optimizedImage from "@/lib/util/optimizedImg";
 
 type Props = {};
 
@@ -11,6 +13,9 @@ export default function Navbar({}: Props) {
     const {
         data: session,
         status,
+    }: {
+        data: any;
+        status: string;
     } = useSession();
 
     console.log(session);
@@ -41,9 +46,17 @@ export default function Navbar({}: Props) {
                 }
                 {
                     status === "authenticated" ? (
-                        <div className="gap-6 flex">
-                            <Link href="/profile" className="btn secondary">My Profile</Link>
-                            <Link href="/new-catch" className="btn">New Post</Link>
+                        <div className="gap-3 flex items-center">
+                            <Link href="/new-catch" className="btn">New Catch</Link>
+                            <Link href="/profile" className="flex flex-col justify-center gap-2 items-center">
+                                <Image
+                                    src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${optimizedImage(session?.user?.anglerProfile?.profilePicture)}`}
+                                    alt="Profile Picture"
+                                    width={70}
+                                    height={70}
+                                    className="rounded-full w-[3rem] h-[3rem] aspect-square border-2 border-slate-600"
+                                />
+                            </Link>
                         </div>
                     ) : (
                         <div>

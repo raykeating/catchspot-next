@@ -54,7 +54,7 @@ const nextAuthOptions = {
 
       // get user info from strapi
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/users/me?populate=anglerProfile`,
+        `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/users/me?populate=anglerProfile.profilePicture`,
         {
           headers: {
             Authorization: `Bearer ${token.jwt}`,
