@@ -1,6 +1,25 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import "@/styles/globals.css";
+import type { AppProps } from "next/app";
+import { Inter } from "next/font/google";
+import Navbar from "@/components/Navbar";
+import { Toaster } from "react-hot-toast";
+import { SessionProvider } from "next-auth/react";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+const inter = Inter({ subsets: ["latin"] });
+
+export default function App({
+	Component,
+	pageProps: { session, ...pageProps },
+}: AppProps) {
+	return (
+		<>
+			<SessionProvider session={session}>
+				<div className={`${inter.className}`}>
+					<Navbar />
+					<Component {...pageProps} />
+				</div>
+			</SessionProvider>
+			<Toaster />
+		</>
+	);
 }
