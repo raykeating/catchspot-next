@@ -62,7 +62,7 @@ export default function Catches({ initialCatches, species }: Props) {
 				setCatches(data.data);
 
 				// update the map bounds
-				if (mapInitRef.current) {
+				if (mapInitRef.current && data.data.length > 0) {
 					mapInitRef.current.fitBounds(calculateBoundingBox(data.data), {
 						padding: 50,
 					});
