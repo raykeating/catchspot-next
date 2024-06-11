@@ -40,6 +40,7 @@ export default function useMapMarkers(
 			const {
 				anglerName,
 				anglerImageSrc,
+				imageSrc,
 				lat,
 				lng,
 				lureName,
@@ -55,7 +56,7 @@ export default function useMapMarkers(
 				anchor: "bottom",
 			}).setHTML(
 				`<div class="flex flex-col">
-					<img src="/images/trout.jpg" alt="" class="rounded-sm object-cover w-full h-24 mb-2" />
+					<img src="${imageSrc}" alt="" class="rounded-sm object-cover w-full h-24 mb-2" />
 					<p class="${inter.className} font-semibold">${speciesName}</p>
 					<p class="truncate w-44 ${inter.className} mb-1">${locationName}</p>
 					<p class="${inter.className} text-slate-600 mb-2">${length}" • ${lureName}</p>
@@ -63,7 +64,7 @@ export default function useMapMarkers(
 						<img src="${anglerImageSrc}" alt="" class="rounded-full h-5 w-5" />
 						<p class="${inter.className}">${anglerName}</p>
 					</div>
-					<a href="/catches/1" class="btn !h-8 !rounded gap-1 ${inter.className}">View Catch
+					<a href="/catches/${catchItem.id}" class="btn !h-8 !rounded gap-1 ${inter.className}">View Catch
 						<i class="fa-solid fa-arrow-up-right-from-square text-[0.7rem]"></i>
 					</a>
 				</div>`

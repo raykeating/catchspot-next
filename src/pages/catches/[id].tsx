@@ -6,6 +6,7 @@ import { Map, Popup, Marker } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Inter } from "next/font/google";
 import VerticalCatchCard from "@/components/VerticalCatchCard";
+import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,6 +37,8 @@ export default function IndividualCatchPage({
 
 	const mapRef = useRef<HTMLDivElement | null>(null);
 
+	const router = useRouter();
+
 	// Initialize the map
 	useEffect(() => {
 		if (mapRef.current) {
@@ -64,9 +67,18 @@ export default function IndividualCatchPage({
 				.setPopup(popUp)
 				.addTo(map);
 
-			catchItem.popup = popUp;
+			// fly to the marker and open the popup
+			setTimeout(() => {
+				map.flyTo({
+					center: [lng, lat + 0.008],
+					zoom: 13,
+					duration: 1500,
+				});
+
+				popUp.addTo(map);
+			}, 1500);
 		}
-	}, []);
+	}, [router.query.id]);
 
 	return (
 		<div className="max-w-[1100px] mx-auto px-4 mt-36 flex flex-col gap-12">

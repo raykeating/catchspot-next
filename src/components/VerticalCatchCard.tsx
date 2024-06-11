@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import parseCatchData from "@/lib/util/parseCatchData";
+import Link from "next/link";
 
 type Props = {
 	catchItem: any;
@@ -22,7 +23,7 @@ export default function VerticalCatchCard({
     } = parseCatchData(catchItem);
 
 	return (
-		<div className="flex flex-col gap-4 w-full">
+		<Link href={`/catches/${catchItem.id}`} className="flex flex-col gap-4 w-full">
             <div className="flex gap-3 items-center">
 				<Image
 					src={anglerImageSrc}
@@ -40,14 +41,14 @@ export default function VerticalCatchCard({
 				<Image
 					src={imageSrc}
 					alt=""
-					width={200}
-					height={256}
+					width={400}
+					height={456}
 					className="rounded-lg object-cover w-full h-48 mb-4"
 				/>
 				<p className="font-bold text-[1.05rem] mb-1">{speciesName}</p>
 				<p className="text-slate-600 mb-1">{length}" • {lureName}</p>
 				<p className="font-semibold truncate w-64">{locationName}</p>
 			</div>
-		</div>
+		</Link>
 	);
 }
