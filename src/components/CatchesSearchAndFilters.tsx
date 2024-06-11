@@ -1,9 +1,21 @@
 import React from "react";
 import Image from "next/image";
 
-type Props = {};
+type Props = {
+	searchTerm: string;
+	setSearchTerm: (searchTerm: string) => void;
+	filters: { species: string; myCatches: string };
+	setFilters: (filters: { species: string; myCatches: string }) => void;
+	species: string[];
+};
 
-export default function CatchesSearchAndFilters({}: Props) {
+export default function CatchesSearchAndFilters({
+	searchTerm,
+	setSearchTerm,
+	filters,
+	setFilters,
+	species,
+}: Props) {
 	return (
 		<div className="w-full pt-[5rem]">
 			<div className="p-6 bg-slate-50 flex gap-3">
@@ -21,18 +33,18 @@ export default function CatchesSearchAndFilters({}: Props) {
 						id="search"
 						className="p-2 pl-8 rounded-lg border w-full"
 						placeholder="Search"
+						value={searchTerm}
+						onChange={(e) => setSearchTerm(e.target.value)}
 					/>
 				</div>
 				<div className="relative inline-block w-64">
-					<select className="block appearance-none w-full bg-white border px-4 py-2 pr-8 rounded-lg focus:outline-none focus:shadow-outline">
-						<option value="none">Species</option>
-						<option value="bass">Bass</option>
-						<option value="trout">Trout</option>
-						<option value="catfish">Catfish</option>
-						<option value="crappie">Crappie</option>
-						<option value="walleye">Walleye</option>
-						<option value="sunfish">Sunfish</option>
-						<option value="perch">Perch</option>
+					<select className="block appearance-none w-full bg-white border px-4 py-2 pr-8 rounded-lg focus:outline-none focus:shadow-outline" onChange={(e) => setFilters({ ...filters, species: e.target.value })}>
+						<option value="">All Species</option>
+						{
+							species.map((speciesName) => (
+								<option key={speciesName} value={speciesName}>{speciesName}</option>
+							))
+						}
 					</select>
 					<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
 						<svg
@@ -45,20 +57,9 @@ export default function CatchesSearchAndFilters({}: Props) {
 					</div>
 				</div>
 				<div className="relative inline-block w-64">
-					<select className="block appearance-none w-full bg-white border px-4 py-2 pr-8 rounded-lg focus:outline-none focus:shadow-outline">
-						<option value="none">Province</option>
-						<option value="alberta">Alberta</option>
-						<option value="british-columbia">British Columbia</option>
-						<option value="manitoba">Manitoba</option>
-						<option value="new-brunswick">New Brunswick</option>
-						<option value="newfoundland-and-labrador">
-							Newfoundland and Labrador
-						</option>
-						<option value="nova-scotia">Nova Scotia</option>
-						<option value="ontario">Ontario</option>
-						<option value="prince-edward-island">Prince Edward Island</option>
-						<option value="quebec">Quebec</option>
-						<option value="saskatchewan">Saskatchewan</option>
+					<select className="block appearance-none w-full bg-white border px-4 py-2 pr-8 rounded-lg focus:outline-none focus:shadow-outline" onChange={(e) => setFilters({ ...filters, myCatches: e.target.value })}>
+						<option value="false">All Anglers</option>
+						<option value="true">My Catches</option>
 					</select>
 					<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
 						<svg
