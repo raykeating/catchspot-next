@@ -32,7 +32,7 @@ export default function CatchesSearchAndFilters({
 						name="search"
 						id="search"
 						className="p-2 pl-8 rounded-lg border w-full"
-						placeholder="Search"
+						placeholder="Search by species, location, lure, or angler"
 						value={searchTerm}
 						onChange={(e) => setSearchTerm(e.target.value)}
 					/>
