@@ -12,7 +12,6 @@ const nextAuthOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        console.log(credentials);
         const res = await fetch(
           process.env.NEXT_PUBLIC_STRAPI_API_URL + "/auth/local",
           {
@@ -25,8 +24,6 @@ const nextAuthOptions = {
         );
         
         const data = await res.json();
-
-        console.log(data);
 
         if (!data.error) {
           return data;

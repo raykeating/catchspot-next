@@ -20,7 +20,7 @@ export default function CatchesSearchAndFilters({
 		<div className="w-full pt-[5rem]">
 			<div className="p-6 bg-slate-50 flex gap-3">
 				<div className="relative w-full">
-					<Image
+					<img
 						src="/icons/search.svg"
 						alt="search"
 						width={16}

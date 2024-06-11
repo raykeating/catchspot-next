@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { Map } from "mapbox-gl";
+import { Map, Marker, Popup } from "mapbox-gl";
 import CatchesSearchAndFilters from "@/components/CatchesSearchAndFilters";
 import CatchCard from "@/components/CatchCard";
 import CatchMap from "@/components/CatchMap";
@@ -25,6 +25,11 @@ export default function Catches({ initialCatches, species }: Props) {
 	const mapInitRef = useRef<Map | null>(null);
 
 	const [catches, setCatches] = useState(initialCatches);
+	const [pins, setPins] = useState<{
+		marker: Marker;
+		popup: Popup;
+		catchId: number;
+	}[]>([]);
 
 	const [searchTerm, setSearchTerm] = useState("");
 	const [filters, setFilters] = useState({
@@ -39,7 +44,6 @@ export default function Catches({ initialCatches, species }: Props) {
 	}, [listContainer]);
 
 	useEffect(() => {
-
 		async function fetchCatches() {
 			const res = await fetch(
 				generateFilteredUrl(
@@ -51,7 +55,19 @@ export default function Catches({ initialCatches, species }: Props) {
 
 			const data = await res.json();
 
-			setCatches(data.data);
+			if (data.error) {
+				console.error(data.error);
+			} else {
+				// set catches to the fetched data
+				setCatches(data.data);
+
+				// update the map bounds
+				if (mapInitRef.current) {
+					mapInitRef.current.fitBounds(calculateBoundingBox(data.data), {
+						padding: 50,
+					});
+				}
+			}
 		}
 
 		fetchCatches();
@@ -65,19 +81,22 @@ export default function Catches({ initialCatches, species }: Props) {
 	}, []);
 
 	// Add markers to the map (custom hook)
-	useMapMarkers(catches, mapInitRef);
+	useMapMarkers(catches, setPins, mapInitRef);
 
 	function openPopup(catchItem: any) {
 		// disable all popups
-		catches.forEach((catchItem: any) => {
-			if (catchItem.popup) catchItem.popup.remove();
+		pins.forEach((pin) => {
+			pin.popup.remove();
 		});
 
+		// find the pin that matches the catch
+		const catchPin = pins.find((pin) => pin.catchId === catchItem.id);
+
 		// open popup
-		if (catchItem.popup && catchItem.marker) {
-			catchItem.popup.addTo(mapInitRef.current!);
+		if (catchPin) {
+			catchPin.popup.addTo(mapInitRef.current!);
 			mapInitRef.current!.flyTo({
-				center: catchItem.marker.getLngLat(),
+				center: catchPin.marker.getLngLat(),
 				zoom: 12,
 			});
 		}
@@ -163,8 +182,6 @@ function generateFilteredUrl(
 	filters: any,
 	myAnglerId: number
 ): string {
-
-	console.log("myAnglerId", myAnglerId);
 
 	let url = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/catches?`;
 	if (searchTerm) {

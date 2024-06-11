@@ -44,7 +44,7 @@ export default function CatchCard({ catchItem, onClick }: Props) {
 						className="p-1 px-3 rounded-lg w-fit hover:bg-slate-300 bg-slate-200 transition-colors flex items-center gap-2"
 					>
 						View Catch{" "}
-						<i className="fa-solid fa-arrow-up-right-from-square text-[0.7rem]"></i>
+						<i aria-hidden className="fa-solid fa-arrow-up-right-from-square text-[0.7rem]"></i>
 					</Link>
 				</div>
 			</div>

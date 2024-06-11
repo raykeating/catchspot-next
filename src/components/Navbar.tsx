@@ -18,8 +18,6 @@ export default function Navbar({}: Props) {
         status: string;
     } = useSession();
 
-    console.log(session);
-
     const router = useRouter();
 
     const handleSignOut = () => {
