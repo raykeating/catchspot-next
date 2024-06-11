@@ -10,7 +10,7 @@ type Props = {
 
 export default function CatchCard({ catchItem, onClick }: Props) {
 
-	const { speciesName, locationName, imageSrc, anglerName, length, lureName } =
+	const { speciesName, locationName, anglerImageSrc, anglerName, length, lureName } =
 		parseCatchData(catchItem);
 
 	return (
@@ -25,9 +25,9 @@ export default function CatchCard({ catchItem, onClick }: Props) {
 			<div className="flex flex-col">
 				<p className="font-bold">{speciesName}</p>
 				<p className="mb-3 truncate max-w-48">{locationName}</p>
-				<div className="flex gap-1 mb-3">
+				<div className="flex gap-2 mb-3">
 					<Image
-						src={imageSrc}
+						src={anglerImageSrc}
 						alt=""
 						width={128}
 						height={128}
@@ -40,7 +40,7 @@ export default function CatchCard({ catchItem, onClick }: Props) {
 				</p>
 				<div className="flex flex-col gap-5 text-sm">
 					<Link
-						href="/catches/1"
+						href={`/catches/${catchItem.id}`}
 						className="p-1 px-3 rounded-lg w-fit hover:bg-slate-300 bg-slate-200 transition-colors flex items-center gap-2"
 					>
 						View Catch{" "}

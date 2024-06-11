@@ -6,7 +6,6 @@ import CatchMap from "@/components/CatchMap";
 import useMapMarkers from "@/lib/hooks/useMapMarkers";
 import autoAnimate from "@formkit/auto-animate";
 import { useSession } from "next-auth/react";
-import { User } from "next-auth";
 
 type Props = {
 	initialCatches: any;
@@ -184,12 +183,12 @@ function generateFilteredUrl(
 		url += `&filters[angler][id][$eq]=${myAnglerId}`;
 	}
 
-	return url + "&populate=angler.profilePicture,species,location,lure";
+	return url + "&populate=angler.profilePicture,species,location,lure,image";
 }
 
 export async function getServerSideProps() {
 	const catchesRes = await fetch(
-		`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/catches?populate=angler.profilePicture,species,location,lure`
+		`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/catches?populate=angler.profilePicture,species,location,lure,image`
 	);
 
 	const catches = await catchesRes.json();

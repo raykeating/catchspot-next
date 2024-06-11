@@ -35,3 +35,7 @@ option {
   cursor: pointer;
   z-index: 100;
 }
+
+.mapboxgl-ctrl-bottom-right {
+  display: none;
+}

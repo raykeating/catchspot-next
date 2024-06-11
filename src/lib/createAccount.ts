@@ -64,8 +64,8 @@ function anglerAsFormData(user: {
     email: string;
     firstName: string;
     lastName: string;
-    profilePicture: string;
-    bio: string;
+    profilePicture: any;
+    location: string;
 }) {
     const formData = new FormData();
 
@@ -73,7 +73,7 @@ function anglerAsFormData(user: {
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
-        bio: user.bio,
+        location: user.location,
     }));
 
     if (user.profilePicture) {

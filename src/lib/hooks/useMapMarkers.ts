@@ -14,7 +14,7 @@ export default function useMapMarkers(catches: any, mapInitRef: any) {
                 catches.map((catchItem: any) => {
                     const {
                         anglerName,
-                        imageSrc,
+                        anglerImageSrc,
                         lat,
                         lng,
                         lureName,
@@ -35,7 +35,7 @@ export default function useMapMarkers(catches: any, mapInitRef: any) {
                             <p class="truncate w-44 ${inter.className} mb-1">${locationName}</p>
                             <p class="${inter.className} text-slate-600 mb-2">${length}" • ${lureName}</p>
                             <div class="flex gap-2 mb-4">
-                                <img src="${imageSrc}" alt="" class="rounded-full h-5 w-5" />
+                                <img src="${anglerImageSrc}" alt="" class="rounded-full h-5 w-5" />
                                 <p class="${inter.className}">${anglerName}</p>
                             </div>
                             <a href="/catches/1" class="btn !h-8 !rounded gap-1 ${inter.className}">View Catch

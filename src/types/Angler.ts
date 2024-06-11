@@ -4,5 +4,5 @@ export type Angler = {
     firstName: string;
     lastName: string;
     profilePicture: File | null;
-    bio: string;
+    location: string;
 }
