@@ -32,7 +32,7 @@ export default function Navbar({}: Props) {
     };
 
 	return (
-		<nav className="flex w-full justify-between items-center px-12 py-6 shadow fixed top-0 z-50 bg-white h-24">
+		<nav className="flex w-full justify-between items-center px-12 py-4 shadow fixed top-0 z-50 bg-white h-20">
 			<p className="font-black text-xl">Catch<span className="text-slate-500 font-black">Spot</span></p>
 			<div className="flex gap-8 items-center">
                 <Link href="/catches">Catches</Link>

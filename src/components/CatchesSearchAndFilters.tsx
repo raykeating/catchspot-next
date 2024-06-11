@@ -5,7 +5,7 @@ type Props = {};
 
 export default function CatchesSearchAndFilters({}: Props) {
 	return (
-		<div className="w-full pt-[5.8rem]">
+		<div className="w-full pt-[5rem]">
 			<div className="p-6 bg-slate-50 flex gap-3">
 				<div className="relative w-full">
 					<Image

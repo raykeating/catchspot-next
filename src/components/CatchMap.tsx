@@ -1,37 +1,19 @@
 import React, { useRef, useEffect } from "react";
-import { Map } from "mapbox-gl";
+import { Map, Marker, Popup } from "mapbox-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+import { Inter } from "next/font/google";
 
-type Props = {};
+const inter = Inter({ subsets: ["latin"] });
 
-function initMap(container: HTMLDivElement, coords: [number, number]) {
-	return new Map({
-		container,
-		style: "mapbox://styles/mapbox/streets-v12",
-		pitchWithRotate: false,
-		center: coords,
-		zoom: 15,
-		accessToken:
-			"pk.eyJ1IjoicmtlYXRpbmciLCJhIjoiY2xuMXM3YnVlMDFkYzJsbWZkdnd5ZmlucCJ9.i--1vZDuWSGIyvsjCQxPcA",
-		doubleClickZoom: false,
-	});
-}
+type Props = {
+	mapRef: React.MutableRefObject<HTMLDivElement | null>;
+};
 
-export default function CatchMap({}: Props) {
-	const mapRef = useRef<HTMLDivElement>(null);
-
-	useEffect(() => {
-		if (mapRef.current) {
-			const map = initMap(
-				mapRef.current,
-				[-79.27333384841043, 42.97302361446369]
-			);
-            console.log('loaded map');
-		}
-	}, []);
+export default function CatchMap({ mapRef }: Props) {
 
 	return (
 		<div
-			className="map !absolute !top-0 !bottom-0 !w-full !h-[calc(100vh-11rem)]"
+			className="map !absolute !top-0 !bottom-0 !w-full !h-[calc(100vh-10rem)]"
 			ref={mapRef}
 		></div>
 	);

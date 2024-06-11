@@ -9,9 +9,15 @@ export default function optimizedImage(imageAttributes: {
         small: {
             url: string;
         };
+        thumbnail: {
+            url: string;
+        };
     };
     url: string;
-} | null) {
+} | null, size: "thumbnail" | "small" | "medium" | "large" = "large") {
+
+    if (imageAttributes?.formats[size]) return imageAttributes?.formats?.[size].url;
+
     if (imageAttributes === null) return null;
 
     if (!imageAttributes.formats) return imageAttributes.url;
