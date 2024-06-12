@@ -39,3 +39,14 @@ option {
 .mapboxgl-ctrl-bottom-right {
   display: none;
 }
+
+.strapi-blocks ol, .strapi-blocks ul {
+  list-style-type: disc;
+  list-style-position: inside;
+  padding-left: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.strapi-blocks p {
+  margin-bottom: 0.5rem;
+}

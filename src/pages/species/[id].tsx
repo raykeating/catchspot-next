@@ -5,12 +5,13 @@ import VerticalCatchCard from "@/components/VerticalCatchCard";
 import { Map } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Link from "next/link";
-import { BlocksRenderer } from '@strapi/blocks-react-renderer';
+import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import ConservationStatusMeter from "@/components/ConservationStatusMeter";
+import SpeciesCard from "@/components/SpeciesCard";
 
-type Props = { species: any; relatedCatches: any };
+type Props = { species: any; otherSpecies: any; relatedCatches: any };
 
-export default function SpeciesPage({ species, relatedCatches }: Props) {
+export default function SpeciesPage({ species, otherSpecies, relatedCatches }: Props) {
 	const imageSrc = `${process.env.NEXT_PUBLIC_STRAPI_URL}${optimizedImg(
 		species.attributes.image.data.attributes,
 		"large"
@@ -21,15 +22,15 @@ export default function SpeciesPage({ species, relatedCatches }: Props) {
 	// Initialize the map
 	useEffect(() => {
 		if (mapRef.current && species.attributes.geographicRange) {
-
-			const map = initMap(mapRef.current, [
-                // north american center
-                -100.43701171875,
-                39.639537564366684,
-            ]);
+			const map = initMap(
+				mapRef.current,
+				[
+					// north american center
+					-100.43701171875, 39.639537564366684,
+				]
+			);
 
 			map.on("load", () => {
-
 				// Add a data source containing GeoJSON data.
 				map.addSource("geographic-distribution", {
 					type: "geojson",
@@ -64,7 +65,12 @@ export default function SpeciesPage({ species, relatedCatches }: Props) {
 
 	return (
 		<div className="max-w-[1100px] mx-auto mt-32">
-            <Link href="/species" className="px-3 py-1 rounded-lg hover:bg-slate-100 -translate-x-3 mb-5 block transition-all w-fit"><i className="fa-solid fa-angle-left mr-3"></i>All Species</Link>
+			<Link
+				href="/species"
+				className="px-3 py-1 rounded-lg hover:bg-slate-100 -translate-x-3 mb-5 block transition-all w-fit"
+			>
+				<i className="fa-solid fa-angle-left mr-3"></i>All Species
+			</Link>
 			<h1 className="text-3xl font-bold">{species.attributes.name}</h1>
 			<h2 className="text-lg italic text-slate-600 mb-8">
 				{species.attributes.latinName}
@@ -92,54 +98,72 @@ export default function SpeciesPage({ species, relatedCatches }: Props) {
 					})}
 				</div>
 			</div>
-            {
-                species.attributes.geographicRange &&
-                <div className="flex flex-col mb-5">
-                    <p className="text-2xl font-semibold">Geographic Range</p>
-                    <p className="text-slate-500">
-                        Distribution of {species.attributes.name} in the wild
-                    </p>
-                </div>
-            }
+			{species.attributes.geographicRange && (
+				<div className="flex flex-col mb-5">
+					<p className="text-2xl font-semibold">Geographic Range</p>
+					<p className="text-slate-500">
+						Distribution of {species.attributes.name} in the wild
+					</p>
+				</div>
+			)}
 			<div
 				className="w-full h-[360px] rounded-xl overflow-hidden mb-8"
 				ref={mapRef}
 			></div>
-            <div className="flex flex-col mb-8">
-                <p className="text-2xl font-semibold">Description</p>
-                <p className="text-slate-500 mb-4">
-                    Physical characteristics and appearance
-                </p>
-                <BlocksRenderer content={species.attributes.description} />
-            </div>
-            <div className="flex flex-col mb-8">
-                <p className="text-2xl font-semibold">Size</p>
-                <p className="text-slate-500 mb-4">
-                    Average Length and Weight
-                </p>
-                <BlocksRenderer content={species.attributes.size} />
-            </div>
-            <div className="flex flex-col mb-8">
-                <p className="text-2xl font-semibold">Preferred Habitat</p>
-                <p className="text-slate-500 mb-4">
-                    Ideal Environmental Conditions
-                </p>
-                <BlocksRenderer content={species.attributes.preferredHabitat} />
-            </div>
-            <div className="flex flex-col mb-8">
-                <p className="text-2xl font-semibold">Diet</p>
-                <p className="text-slate-500 mb-4">
-                    Typical Food Sources and Feeding Patterns
-                </p>
-                <BlocksRenderer content={species.attributes.diet} />
-            </div>
-            <div className="flex flex-col mb-24">
-                <p className="text-2xl font-semibold">Conservation Status</p>
-                <p className="text-slate-500 mb-4">
-                    Population
-                </p>
-                <ConservationStatusMeter status={species.attributes.conservationStatus} />
-            </div>
+			<div className="max-w-[900px]">
+				<div className="flex flex-col mb-8">
+					<p className="text-2xl font-semibold">Description</p>
+					<p className="text-slate-500 mb-4">
+						Physical characteristics and appearance
+					</p>
+					<div className="strapi-blocks">
+						<BlocksRenderer content={species.attributes.description} />
+					</div>
+				</div>
+				<div className="flex flex-col mb-8">
+					<p className="text-2xl font-semibold">Size</p>
+					<p className="text-slate-500 mb-4">Average Length and Weight</p>
+					<div className="strapi-blocks">
+						<BlocksRenderer content={species.attributes.size} />
+					</div>
+				</div>
+				<div className="flex flex-col mb-8">
+					<p className="text-2xl font-semibold">Preferred Habitat</p>
+					<p className="text-slate-500 mb-4">Ideal Environmental Conditions</p>
+					<div className="strapi-blocks">
+						<BlocksRenderer content={species.attributes.preferredHabitat} />
+					</div>
+				</div>
+				<div className="flex flex-col mb-8">
+					<p className="text-2xl font-semibold">Diet</p>
+					<p className="text-slate-500 mb-4">
+						Typical Food Sources and Feeding Patterns
+					</p>
+					<div className="strapi-blocks">
+						<BlocksRenderer content={species.attributes.diet} />
+					</div>
+				</div>
+				<div className="flex flex-col mb-12">
+					<p className="text-2xl font-semibold">Conservation Status</p>
+					<p className="text-slate-500 mb-4">Population</p>
+					<ConservationStatusMeter
+						status={species.attributes.conservationStatus}
+					/>
+				</div>
+			</div>
+			<div className="flex flex-col mb-24">
+				<p className="text-2xl font-semibold">Other Species</p>
+				<p className="text-slate-500 mb-4">
+					More species you might be interested in learning about
+				</p>
+				<div className="flex flex-wrap gap-[5%]">
+				{otherSpecies.map((speciesItem: any) => (
+					<div className="basis-[32%] mb-[2%] -mx-4" key={speciesItem.id}>
+						<SpeciesCard speciesItem={speciesItem} />
+					</div>
+				))}
+			</div>
+			</div>
 		</div>
 	);
 }
@@ -159,9 +183,16 @@ export async function getServerSideProps(context: any) {
 
 	const relatedCatches = await relatedCatchesRes.json();
 
+	const otherSpeciesRes = await fetch(
+		`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/species?pagination[page]=1&pagination[pageSize]=3&populate=*`
+	);
+
+	const otherSpecies = await otherSpeciesRes.json();
+
 	return {
 		props: {
 			species: species.data,
+			otherSpecies: otherSpecies.data,
 			relatedCatches: relatedCatches.data,
 		},
 	};
