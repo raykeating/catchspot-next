@@ -19,7 +19,7 @@ export default function SpeciesCard({ speciesItem }: Props) {
 		>
 			<div className="flex flex-col gap-1">
 				<div className="flex flex-col mb-3">
-					<p className="text-xl font-bold">{speciesItem.attributes.name}</p>
+					<p className="text-xl font-semibold">{speciesItem.attributes.name}</p>
 					<p className="italic text-slate-600">
 						{speciesItem.attributes.latinName}
 					</p>

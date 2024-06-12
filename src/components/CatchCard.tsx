@@ -23,7 +23,7 @@ export default function CatchCard({ catchItem, onClick }: Props) {
 				className="rounded-xl object-cover w-48 h-full"
 			/>
 			<div className="flex flex-col">
-				<p className="font-bold">{speciesName}</p>
+				<p className="font-semibold">{speciesName}</p>
 				<p className="mb-3 truncate max-w-48">{locationName}</p>
 				<div className="flex gap-2 mb-3">
 					<Image
