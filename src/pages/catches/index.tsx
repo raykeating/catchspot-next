@@ -6,6 +6,7 @@ import CatchMap from "@/components/CatchMap";
 import useMapMarkers from "@/lib/hooks/useMapMarkers";
 import autoAnimate from "@formkit/auto-animate";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 type Props = {
 	initialCatches: any;
@@ -31,7 +32,12 @@ export default function Catches({ initialCatches, species }: Props) {
 		catchId: number;
 	}[]>([]);
 
-	const [searchTerm, setSearchTerm] = useState("");
+	const router = useRouter();
+
+	// get searchTerm parameter from the URL
+	const searchTermParam = router.query.searchTerm as string;
+
+	const [searchTerm, setSearchTerm] = useState(searchTermParam || "");
 	const [filters, setFilters] = useState({
 		species: "",
 		myCatches: "false",

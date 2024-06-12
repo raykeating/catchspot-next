@@ -112,7 +112,6 @@ export default function Signup({}: Props) {
 						<>
 							<label htmlFor="file-input">
 								Profile picture
-								<span className="text-gray-400 text-sm"> - Optional</span>
 							</label>
 							<input
 								type="file"
