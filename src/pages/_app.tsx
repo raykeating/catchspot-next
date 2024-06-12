@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
+import Footer from "@/components/Footer";
+import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,12 +13,17 @@ export default function App({
 	Component,
 	pageProps: { session, ...pageProps },
 }: AppProps) {
+	const router = useRouter();
+
 	return (
 		<>
 			<SessionProvider session={session}>
 				<div className={`${inter.className}`}>
 					<Navbar />
-					<Component {...pageProps} />
+					<div className="min-h-screen">
+						<Component {...pageProps} />
+					</div>
+					{router.pathname !== "/catches" && <Footer />}
 				</div>
 			</SessionProvider>
 			<Toaster />

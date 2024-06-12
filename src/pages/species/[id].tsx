@@ -11,7 +11,11 @@ import SpeciesCard from "@/components/SpeciesCard";
 
 type Props = { species: any; otherSpecies: any; relatedCatches: any };
 
-export default function SpeciesPage({ species, otherSpecies, relatedCatches }: Props) {
+export default function SpeciesPage({
+	species,
+	otherSpecies,
+	relatedCatches,
+}: Props) {
 	const imageSrc = `${process.env.NEXT_PUBLIC_STRAPI_URL}${optimizedImg(
 		species.attributes.image.data.attributes,
 		"large"
@@ -99,17 +103,20 @@ export default function SpeciesPage({ species, otherSpecies, relatedCatches }: P
 				</div>
 			</div>
 			{species.attributes.geographicRange && (
-				<div className="flex flex-col mb-5">
-					<p className="text-2xl font-semibold">Geographic Range</p>
-					<p className="text-slate-500">
-						Distribution of {species.attributes.name} in the wild
-					</p>
-				</div>
+				<>
+					<div className="flex flex-col mb-5">
+						<p className="text-2xl font-semibold">Geographic Range</p>
+						<p className="text-slate-500">
+							Distribution of {species.attributes.name} in the wild
+						</p>
+					</div>
+
+					<div
+						className="w-full h-[360px] rounded-xl overflow-hidden mb-8"
+						ref={mapRef}
+					></div>
+				</>
 			)}
-			<div
-				className="w-full h-[360px] rounded-xl overflow-hidden mb-8"
-				ref={mapRef}
-			></div>
 			<div className="max-w-[900px]">
 				<div className="flex flex-col mb-8">
 					<p className="text-2xl font-semibold">Description</p>
@@ -157,12 +164,12 @@ export default function SpeciesPage({ species, otherSpecies, relatedCatches }: P
 					More species you might be interested in learning about
 				</p>
 				<div className="flex flex-wrap gap-[5%]">
-				{otherSpecies.map((speciesItem: any) => (
-					<div className="basis-[32%] mb-[2%] -mx-4" key={speciesItem.id}>
-						<SpeciesCard speciesItem={speciesItem} />
-					</div>
-				))}
-			</div>
+					{otherSpecies.map((speciesItem: any) => (
+						<div className="basis-[32%] mb-[2%] -mx-4" key={speciesItem.id}>
+							<SpeciesCard speciesItem={speciesItem} />
+						</div>
+					))}
+				</div>
 			</div>
 		</div>
 	);
