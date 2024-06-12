@@ -20,6 +20,8 @@ export default function Navbar({}: Props) {
 
     const router = useRouter();
 
+    const pathName = router.pathname;
+
     const handleSignOut = () => {
         toast.success("Logging out...");
         router.push("/");
@@ -32,14 +34,14 @@ export default function Navbar({}: Props) {
 	return (
 		<nav className="flex w-full justify-between items-center px-12 py-4 shadow fixed top-0 z-50 bg-white h-20">
 			<p className="font-black text-xl">Catch<span className="text-slate-500 font-black">Spot</span></p>
-			<div className="flex gap-8 items-center">
-                <Link href="/catches">Catches</Link>
-                <Link href="/species">Species</Link>
+			<div className="flex gap-6 items-center">
+                <Link href="/catches" className={`px-3 py-2 transition-colors hover:bg-slate-50 rounded-xl ${pathName === '/catches' && 'bg-slate-50 font-semibold'}`}>Catches</Link>
+                <Link href="/species" className={`px-3 py-2 transition-colors hover:bg-slate-50 rounded-xl ${pathName === '/species' && 'bg-slate-50 font-semibold'}`}>Species</Link>
                 {
                     status === "authenticated" ? (
                         <button onClick={handleSignOut}>Sign Out</button>
                     ) : (
-                        <Link href="/login">Log In</Link>
+                        <Link href="/login" className={`px-3 py-2 transition-colors hover:bg-slate-50 rounded-xl ${pathName === '/login' && 'bg-slate-50 font-semibold'}`}>Log In</Link>
                     )
                 }
                 {
