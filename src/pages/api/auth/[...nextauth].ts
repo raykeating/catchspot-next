@@ -72,3 +72,5 @@ const nextAuthOptions = {
 } satisfies NextAuthOptions;
 
 export default NextAuth(nextAuthOptions);
+
+export { nextAuthOptions };
