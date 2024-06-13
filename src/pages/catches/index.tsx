@@ -16,7 +16,7 @@ type Props = {
 export default function Catches({ initialCatches, species }: Props) {
 	const {
 		data: session,
-		status
+		status,
 	}: {
 		data: any;
 		status: string;
@@ -26,11 +26,13 @@ export default function Catches({ initialCatches, species }: Props) {
 	const mapInitRef = useRef<Map | null>(null);
 
 	const [catches, setCatches] = useState(initialCatches);
-	const [pins, setPins] = useState<{
-		marker: Marker;
-		popup: Popup;
-		catchId: number;
-	}[]>([]);
+	const [pins, setPins] = useState<
+		{
+			marker: Marker;
+			popup: Popup;
+			catchId: number;
+		}[]
+	>([]);
 
 	const router = useRouter();
 
@@ -134,11 +136,11 @@ export default function Catches({ initialCatches, species }: Props) {
 					{catches.length === 0 && (
 						<div className="w-full h-full flex flex-col gap-1 justify-center items-center">
 							<p>No catches found</p>
-							{
-								status !== "authenticated" && (
-									<p className="text-slate-600">Please log in to see your catches</p>
-								)
-							}
+							{status !== "authenticated" && (
+								<p className="text-slate-600">
+									Please log in to see your catches
+								</p>
+							)}
 						</div>
 					)}
 				</div>
@@ -188,8 +190,7 @@ function generateFilteredUrl(
 	filters: any,
 	myAnglerId: number
 ): string {
-
-	let url = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/catches?`;
+	let url = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/catches?sort=id:desc`;
 	if (searchTerm) {
 		url += `filters[$or][0][species][name][$containsi]=${searchTerm}`;
 		url += `&filters[$or][1][angler][firstName][$containsi]=${searchTerm}`;
@@ -211,7 +212,7 @@ function generateFilteredUrl(
 
 export async function getServerSideProps() {
 	const catchesRes = await fetch(
-		`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/catches?populate=angler.profilePicture,species,location,lure,image`
+		`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/catches?sort=id:desc&populate=angler.profilePicture,species,location,lure,image`
 	);
 
 	const catches = await catchesRes.json();

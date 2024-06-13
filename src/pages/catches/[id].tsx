@@ -124,7 +124,7 @@ export default function IndividualCatchPage({
 							<i className="fa-solid fa-external-link text-xs -translate-y-1 ml-1"></i>
 						</Link>
 					</p>
-					<Link href="/species/#" className="btn">
+					<Link href={`/species/${catchItem.attributes.species.data.id}`} className="btn">
 						Learn more about {speciesName} ({speciesLatinName})
 					</Link>
 				</div>

@@ -18,6 +18,8 @@ export default function Navbar({}: Props) {
         status: string;
     } = useSession();
 
+    console.log(session, status)
+
     const router = useRouter();
 
     const pathName = router.pathname;

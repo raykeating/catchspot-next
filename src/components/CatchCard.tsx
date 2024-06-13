@@ -10,17 +10,17 @@ type Props = {
 
 export default function CatchCard({ catchItem, onClick }: Props) {
 
-	const { speciesName, locationName, anglerImageSrc, anglerName, length, lureName } =
+	const { speciesName, locationName, anglerImageSrc, imageSrc, anglerName, length, lureName } =
 		parseCatchData(catchItem);
 
 	return (
-		<button className="flex p-6 pr-12 gap-6 hover:bg-slate-50 cursor-pointer transition-colors text-start" onClick={onClick}>
+		<button className="flex items-center p-6 pr-12 gap-6 hover:bg-slate-50 cursor-pointer transition-colors text-start w-full" onClick={onClick}>
 			<Image
-				src="/images/trout.jpg"
+				src={imageSrc}
 				alt=""
 				width={200}
 				height={256}
-				className="rounded-xl object-cover w-48 h-full"
+				className="rounded-xl object-cover w-48 h-40"
 			/>
 			<div className="flex flex-col">
 				<p className="font-semibold">{speciesName}</p>
