@@ -72,7 +72,7 @@ export default function Catches({ initialCatches, species }: Props) {
 				// update the map bounds
 				if (mapInitRef.current && data.data.length > 0) {
 					mapInitRef.current.fitBounds(calculateBoundingBox(data.data), {
-						padding: 50,
+						padding: 200,
 					});
 				}
 			}
@@ -190,7 +190,7 @@ function generateFilteredUrl(
 	filters: any,
 	myAnglerId: number
 ): string {
-	let url = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/catches?sort=id:desc`;
+	let url = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/catches?`;
 	if (searchTerm) {
 		url += `filters[$or][0][species][name][$containsi]=${searchTerm}`;
 		url += `&filters[$or][1][angler][firstName][$containsi]=${searchTerm}`;
@@ -207,7 +207,7 @@ function generateFilteredUrl(
 		url += `&filters[angler][id][$eq]=${myAnglerId}`;
 	}
 
-	return url + "&populate=angler.profilePicture,species,location,lure,image";
+	return url + "&populate=angler.profilePicture,species,location,lure,image&sort=id:desc";
 }
 
 export async function getServerSideProps() {
