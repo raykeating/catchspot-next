@@ -14,27 +14,49 @@ type Props = {
 };
 
 export default function Profile({ profile, myCatches, species }: Props) {
+	species = species.map((speciesItem: any) => {
+		const count = myCatches.filter(
+			(catchItem: any) =>
+				catchItem.attributes.species.data.id === speciesItem.id
+		).length;
+		const longest = Math.max(
+			...myCatches
+				.filter(
+					(catchItem: any) =>
+						catchItem.attributes.species.data.id === speciesItem.id
+				)
+				.map((catchItem: any) => catchItem.attributes.length)
+		);
+		return { ...speciesItem, count, longest };
+	});
+
+  const loggedSpeciesCount = species.filter((speciesItem: any) => speciesItem.count > 0).length;
+
 	const [tab, setTab] = useState<"catches" | "species">("species");
 
-  const parentContainer = useRef<HTMLDivElement>(null);
+	const parentContainer = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    parentContainer.current && autoAnimate(parentContainer.current);
-  }, [parentContainer]);
+	useEffect(() => {
+		parentContainer.current && autoAnimate(parentContainer.current);
+	}, [parentContainer]);
 
 	return (
 		<div className="max-w-[1000px] mx-auto mt-36">
 			<div className="w-full justify-between flex items-end">
 				<div className="flex gap-3 items-center mb-8">
 					<Image
-						src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${optimizedImage(profile.anglerProfile.profilePicture)}`}
+						src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${optimizedImage(
+							profile.anglerProfile.profilePicture
+						)}`}
 						alt=""
 						className="h-16 w-16 object-cover rounded-full"
 						height={300}
 						width={300}
 					/>
 					<div>
-						<h1 className="text-3xl font-bold">{profile.anglerProfile.firstName} {profile.anglerProfile.lastName}</h1>
+						<h1 className="text-3xl font-bold">
+							{profile.anglerProfile.firstName} {profile.anglerProfile.lastName}
+						</h1>
 						<p className="text-slate-600">{profile.anglerProfile.location}</p>
 					</div>
 				</div>
@@ -65,10 +87,14 @@ export default function Profile({ profile, myCatches, species }: Props) {
 			<div ref={parentContainer}>
 				{tab === "catches" && (
 					<React.Fragment key="catches">
-						<div className="flex flex-col mb-5">
-							<p className="text-2xl font-semibold">Your Catches</p>
-							<p className="text-slate-500">{myCatches.length} Catches Logged</p>
-						</div>
+						{myCatches.length > 0 && (
+							<div className="flex flex-col mb-5">
+								<p className="text-2xl font-semibold">Your Catches</p>
+								<p className="text-slate-500">
+									{myCatches.length} Catches Logged
+								</p>
+							</div>
+						)}
 						<div className="grid grid-cols-2 gap-12 mb-12">
 							{myCatches.map((catchItem: any) => {
 								return (
@@ -76,33 +102,64 @@ export default function Profile({ profile, myCatches, species }: Props) {
 								);
 							})}
 						</div>
+						{/* empty state */}
+						{myCatches.length === 0 && (
+							<div className="flex flex-col items-center justify-center h-[45vh]">
+								<p className="text-2xl font-semibold">No Catches Yet</p>
+								<p className="text-slate-500">
+									<Link href="/new-catch" className="underline font-medium">
+										Log your first catch
+									</Link>{" "}
+									to see it here
+								</p>
+							</div>
+						)}
 					</React.Fragment>
 				)}
-        {tab === "species" && (
+				{tab === "species" && (
 					<React.Fragment key="species">
 						<div className="flex flex-col mb-6">
 							<p className="text-2xl font-semibold">Your Species</p>
-							<p className="text-slate-500">12 Species Logged</p>
+							<p className="text-slate-500">{loggedSpeciesCount}/{species.length} Species Logged</p>
 						</div>
 						<div className="grid grid-cols-3 gap-10 mb-12">
 							{species.map((speciesItem: any) => {
-
-                const count = myCatches.filter((catchItem: any) => catchItem.attributes.species.data.id === speciesItem.id).length;
-                const longest = Math.max(...myCatches.filter((catchItem: any) => catchItem.attributes.species.data.id === speciesItem.id).map((catchItem: any) => catchItem.attributes.length));
-
 								return (
 									<div className="flex gap-4 items-center">
-                    <Image src="/images/trout.jpg" alt="" width={400} height={400} className={`rounded-lg object-cover w-36 h-20 ${
-                      count > 0 ? "none" : "grayscale"
-                    }`} />
-                    <div className="flex flex-col">
-                      <p className="font-bold text-[1.05rem] mb-1">{speciesItem.attributes.name}</p>
-                      <p className="text-slate-600 mb-1">{count > 0 ? count : "Not"} Logged</p>
-                      <p className="text-slate-600 mb-1 text-sm">{longest > 0 ? `Personal Best - ${longest}"` : <>
-                        <Link target="_blank" href={`/species/${speciesItem.id}`} className="text-slate-600 hover:underline">Learn More <i className="fa-solid fa-external-link text-[0.5rem] -translate-y-[0.1rem]"></i></Link>
-                      </>}</p>
-                    </div>
-                  </div>
+										<Image
+											src="/images/trout.jpg"
+											alt=""
+											width={400}
+											height={400}
+											className={`rounded-lg object-cover w-36 h-20 ${
+												species.count > 0 ? "none" : "grayscale"
+											}`}
+										/>
+										<div className="flex flex-col">
+											<p className="font-bold text-[1.05rem] mb-1">
+												{speciesItem.attributes.name}
+											</p>
+											<p className="text-slate-600 mb-1">
+												{species.count > 0 ? species.count : "Not"} Logged
+											</p>
+											<p className="text-slate-600 mb-1 text-sm">
+												{species.longest > 0 ? (
+													`Personal Best - ${species.longest}"`
+												) : (
+													<>
+														<Link
+															target="_blank"
+															href={`/species/${speciesItem.id}`}
+															className="text-slate-600 hover:underline"
+														>
+															Learn More{" "}
+															<i className="fa-solid fa-external-link text-[0.5rem] -translate-y-[0.1rem]"></i>
+														</Link>
+													</>
+												)}
+											</p>
+										</div>
+									</div>
 								);
 							})}
 						</div>
