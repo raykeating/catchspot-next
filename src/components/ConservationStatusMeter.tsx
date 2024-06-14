@@ -44,11 +44,11 @@ export default function ConservationStatusMeter({ status }: Props) {
 	];
 
 	return (
-		<div className="flex border-slate-400 border rounded-xl overflow-hidden w-fit">
-			<div className="flex gap-3 p-4 py-3">
+		<div className="flex border-slate-400 border rounded-xl overflow-hidden w-fit max-md:text-xs">
+			<div className="flex gap-3 p-4 py-3 flex-wrap">
 				{conservationStatusOptions.map((statusOption) => (
 					<div
-						className="h-9 w-9 rounded-full border-slate-400 border flex items-center justify-center"
+						className="h-9 w-9 rounded-full border-slate-400 border flex items-center justify-center text-sm"
 						style={
 							statusOption.name === status
 								? {
@@ -65,7 +65,7 @@ export default function ConservationStatusMeter({ status }: Props) {
 					</div>
 				))}
 			</div>
-				<div className="flex px-5 items-center font-bold text-white" style={{
+				<div className="hidden md:flex px-5 items-center font-bold text-white" style={{
                     backgroundColor: conservationStatusOptions.find(
                         (statusOption) => statusOption.name === status
                     )?.color

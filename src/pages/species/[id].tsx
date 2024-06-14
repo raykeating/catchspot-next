@@ -68,7 +68,7 @@ export default function SpeciesPage({
 	}, []);
 
 	return (
-		<div className="max-w-[1100px] mx-auto mt-32">
+		<div className="max-w-[1100px] mx-auto mt-32 px-4">
 			<Link
 				href="/species"
 				className="px-3 py-1 rounded-lg hover:bg-slate-100 -translate-x-3 mb-5 block transition-all w-fit"
@@ -96,7 +96,7 @@ export default function SpeciesPage({
 						</span>
 					</p>
 				</div>
-				<div className="flex gap-5 mb-12">
+				<div className="flex max-md:flex-col gap-5 mb-12">
 					{relatedCatches.map((catchItem: any) => {
 						return <VerticalCatchCard catchItem={catchItem} />;
 					})}
@@ -163,7 +163,7 @@ export default function SpeciesPage({
 				<p className="text-slate-500 mb-4">
 					More species you might be interested in learning about
 				</p>
-				<div className="flex flex-wrap gap-[5%]">
+				<div className="flex max-md:flex-col md:gap-5">
 					{otherSpecies.map((speciesItem: any) => (
 						<div className="basis-[32%] mb-[2%] -mx-4" key={speciesItem.id}>
 							<SpeciesCard speciesItem={speciesItem} />
