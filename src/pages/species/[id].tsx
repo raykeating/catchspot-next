@@ -16,6 +16,9 @@ export default function SpeciesPage({
 	otherSpecies,
 	relatedCatches,
 }: Props) {
+
+	console.log(species);
+
 	const imageSrc = `${process.env.NEXT_PUBLIC_STRAPI_URL}${optimizedImg(
 		species.attributes.image.data.attributes,
 		"large"
@@ -140,7 +143,7 @@ export default function SpeciesPage({
 					<p className="text-2xl font-semibold">Preferred Habitat</p>
 					<p className="text-slate-500 mb-4">Ideal Environmental Conditions</p>
 					<div className="strapi-blocks">
-						<BlocksRenderer content={species.preferredHabitat} />
+						<BlocksRenderer content={species.attributes.preferredHabitat} />
 					</div>
 				</div>
 				<div className="flex flex-col mb-8">
