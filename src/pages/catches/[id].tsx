@@ -106,7 +106,7 @@ export default function IndividualCatchPage({
 						</div>
 					</div>
 					<h1 className="text-3xl font-bold">
-						{length}" {speciesName}
+						{length}&quot; {speciesName}
 					</h1>
 					<h2 className="text-slate-600 italic text-lg mb-8">
 						{speciesLatinName}
@@ -143,6 +143,7 @@ export default function IndividualCatchPage({
 					{featuredCatches.map((catchItem: any) => {
 						return (
 							<VerticalCatchCard
+								key={catchItem.id}
 								catchItem={catchItem}
 							/>
 						);

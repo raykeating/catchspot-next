@@ -36,7 +36,7 @@ export default function CatchCard({ catchItem, onClick }: Props) {
 					<p>{anglerName}</p>
 				</div>
 				<p className="text-slate-500 mb-3 hidden md:block">
-					{length}" <span className="font-thin">•</span> {lureName}
+					{length}&quot; <span className="font-thin">•</span> {lureName}
 				</p>
 				<div className="flex flex-col gap-5 text-sm">
 					<Link

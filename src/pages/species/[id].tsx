@@ -98,7 +98,9 @@ export default function SpeciesPage({
 				</div>
 				<div className="flex max-md:flex-col gap-5 mb-12">
 					{relatedCatches.map((catchItem: any) => {
-						return <VerticalCatchCard catchItem={catchItem} />;
+						return (
+							<VerticalCatchCard key={catchItem.id} catchItem={catchItem} />
+						);
 					})}
 				</div>
 			</div>
@@ -138,7 +140,7 @@ export default function SpeciesPage({
 					<p className="text-2xl font-semibold">Preferred Habitat</p>
 					<p className="text-slate-500 mb-4">Ideal Environmental Conditions</p>
 					<div className="strapi-blocks">
-						<BlocksRenderer content={species.attributes.preferredHabitat} />
+						<BlocksRenderer content={species.preferredHabitat} />
 					</div>
 				</div>
 				<div className="flex flex-col mb-8">

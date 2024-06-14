@@ -48,6 +48,7 @@ export default function ConservationStatusMeter({ status }: Props) {
 			<div className="flex gap-3 p-4 py-3 flex-wrap">
 				{conservationStatusOptions.map((statusOption) => (
 					<div
+						key={statusOption.name}
 						className="h-9 w-9 rounded-full border-slate-400 border flex items-center justify-center text-sm"
 						style={
 							statusOption.name === status

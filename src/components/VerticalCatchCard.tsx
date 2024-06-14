@@ -46,7 +46,7 @@ export default function VerticalCatchCard({
 					className="rounded-lg object-cover w-full h-48 mb-4"
 				/>
 				<p className="font-bold text-[1.05rem] mb-1">{speciesName}</p>
-				<p className="text-slate-600 mb-1">{length}" • {lureName}</p>
+				<p className="text-slate-600 mb-1">{length}&quot; • {lureName}</p>
 				<p className="font-semibold truncate w-64">{locationName}</p>
 			</div>
 		</Link>

@@ -79,7 +79,7 @@ export default function Login({}: Props) {
 				</form>
 
 				<p className="text-slate-600 mt-6 text-center">
-					Don't have an account?{" "}
+					Don&apos;t have an account?{" "}
 					<Link href="/signup" className="underline font-medium">
 						Sign up
 					</Link>
