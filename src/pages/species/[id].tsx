@@ -17,8 +17,6 @@ export default function SpeciesPage({
 	relatedCatches,
 }: Props) {
 
-	console.log(species);
-
 	const imageSrc = `${process.env.NEXT_PUBLIC_STRAPI_URL}${optimizedImg(
 		species.attributes.image.data.attributes,
 		"large"
