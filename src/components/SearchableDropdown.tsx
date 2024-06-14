@@ -163,7 +163,7 @@ export default function SearchableCountriesDropdown({
 				}`}></i>
 			</button>
 
-			<div className={`absolute top-12 left-0 w-full p-2 bg-white border border-grey rounded-lg shadow-md max-h-[12rem] overflow-y-scroll minimal-scrollbar z-50 transition-all origin-top-left ${
+			<div className={`absolute top-12 left-0 w-full p-2 bg-white border border-grey rounded-lg shadow-md max-h-[18rem] overflow-y-scroll minimal-scrollbar z-50 transition-all origin-top-left ${
 				isOpen ? "visible opacity-100 scale-100" : "invisible opacity-0 scale-90"
 			}`} ref={optionsContainer}>
 				{options
