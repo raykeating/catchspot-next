@@ -14,23 +14,9 @@ type Props = {
 };
 
 export default function Profile({ profile, myCatches, species }: Props) {
-	species = species.map((speciesItem: any) => {
-		const count = myCatches.filter(
-			(catchItem: any) =>
-				catchItem.attributes.species.data.id === speciesItem.id
-		).length;
-		const longest = Math.max(
-			...myCatches
-				.filter(
-					(catchItem: any) =>
-						catchItem.attributes.species.data.id === speciesItem.id
-				)
-				.map((catchItem: any) => catchItem.attributes.length)
-		);
-		return { ...speciesItem, count, longest };
-	});
-
-  const loggedSpeciesCount = species.filter((speciesItem: any) => speciesItem.count > 0).length;
+	const loggedSpeciesCount = species.filter(
+		(speciesItem: any) => speciesItem.count > 0
+	).length;
 
 	const [tab, setTab] = useState<"catches" | "species">("species");
 
@@ -41,8 +27,8 @@ export default function Profile({ profile, myCatches, species }: Props) {
 	}, [parentContainer]);
 
 	return (
-		<div className="max-w-[1000px] mx-auto mt-36">
-			<div className="w-full justify-between flex items-end">
+		<div className="max-w-[1000px] mx-auto mt-36 px-5">
+			<div className="w-full justify-between flex max-md:flex-col">
 				<div className="flex gap-3 items-center mb-8">
 					<Image
 						src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${optimizedImage(
@@ -95,7 +81,7 @@ export default function Profile({ profile, myCatches, species }: Props) {
 								</p>
 							</div>
 						)}
-						<div className="grid grid-cols-2 gap-12 mb-12">
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-12 pb-16">
 							{myCatches.map((catchItem: any) => {
 								return (
 									<VerticalCatchCard key={catchItem.id} catchItem={catchItem} />
@@ -120,19 +106,25 @@ export default function Profile({ profile, myCatches, species }: Props) {
 					<React.Fragment key="species">
 						<div className="flex flex-col mb-6">
 							<p className="text-2xl font-semibold">Your Species</p>
-							<p className="text-slate-500">{loggedSpeciesCount}/{species.length} Species Logged</p>
+							<p className="text-slate-500">
+								{loggedSpeciesCount}/{species.length} Species Logged
+							</p>
 						</div>
-						<div className="grid grid-cols-3 gap-10 mb-12">
+						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
 							{species.map((speciesItem: any) => {
 								return (
 									<div className="flex gap-4 items-center" key={speciesItem.id}>
 										<Image
-											src="/images/trout.jpg"
+											src={`${
+												process.env.NEXT_PUBLIC_STRAPI_URL
+											}${optimizedImage(
+												speciesItem.attributes.image.data.attributes
+											)}`}
 											alt=""
 											width={400}
 											height={400}
 											className={`rounded-lg object-cover w-36 h-20 ${
-												species.count > 0 ? "none" : "grayscale"
+												speciesItem.count > 0 ? "none" : "grayscale"
 											}`}
 										/>
 										<div className="flex flex-col">
@@ -140,11 +132,12 @@ export default function Profile({ profile, myCatches, species }: Props) {
 												{speciesItem.attributes.name}
 											</p>
 											<p className="text-slate-600 mb-1">
-												{species.count > 0 ? species.count : "Not"} Logged
+												{speciesItem.count > 0 ? speciesItem.count : "Not"}{" "}
+												Logged
 											</p>
 											<p className="text-slate-600 mb-1 text-sm">
-												{species.longest > 0 ? (
-													`Personal Best - ${species.longest}"`
+												{speciesItem.longest > 0 ? (
+													`Personal Best - ${speciesItem.longest}"`
 												) : (
 													<>
 														<Link
@@ -153,7 +146,10 @@ export default function Profile({ profile, myCatches, species }: Props) {
 															className="text-slate-600 hover:underline"
 														>
 															Learn More{" "}
-															<i aria-hidden className="fa-solid fa-external-link text-[0.5rem] -translate-y-[0.1rem]"></i>
+															<i
+																aria-hidden
+																className="fa-solid fa-external-link text-[0.5rem] -translate-y-[0.1rem]"
+															></i>
 														</Link>
 													</>
 												)}
@@ -205,13 +201,29 @@ export async function getServerSideProps(context: any) {
 		`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/species?populate=*`
 	);
 
-	const species = await speciesRes.json();
+	const speciesData = await speciesRes.json();
+
+	const species = speciesData.data.map((speciesItem: any) => {
+		const count = myCatches.data.filter(
+			(catchItem: any) =>
+				catchItem.attributes.species.data.id === speciesItem.id
+		).length;
+		const longest = Math.max(
+			...myCatches.data
+				.filter(
+					(catchItem: any) =>
+						catchItem.attributes.species.data.id === speciesItem.id
+				)
+				.map((catchItem: any) => catchItem.attributes.length)
+		);
+		return { ...speciesItem, count, longest };
+	});
 
 	return {
 		props: {
 			profile,
 			myCatches: myCatches.data,
-			species: species.data,
+			species: species,
 		},
 	};
 }

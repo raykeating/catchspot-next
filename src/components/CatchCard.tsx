@@ -20,7 +20,7 @@ export default function CatchCard({ catchItem, onClick }: Props) {
 				alt=""
 				width={200}
 				height={256}
-				className="rounded-xl object-cover hidden sm:block sm:w-36 sm:h-32 md:w-48 md:h-40"
+				className="rounded-xl object-cover hidden sm:block sm:w-36 sm:h-32 md:w-48 md:h-40 flex-shrink-0"
 			/>
 			<div className="flex flex-col w-full sm:w-[60%]">
 				<p className="font-semibold">{speciesName}</p>

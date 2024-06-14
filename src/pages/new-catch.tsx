@@ -79,7 +79,7 @@ export default function NewCatchPage({
     }
 
 	return (
-		<form className="mt-36 max-w-[700px] mx-auto" onSubmit={handleSubmit}>
+		<form className="mt-36 max-w-[700px] mx-auto px-5" onSubmit={handleSubmit}>
 			<div className="flex flex-col mb-5">
 				<p className="text-3xl font-semibold">Post your Catch</p>
 				<p className="text-slate-500 text-lg">
@@ -168,8 +168,8 @@ export default function NewCatchPage({
 					required
 				/>
 			</div>
-			<div className="flex gap-4">
-				<div className="flex flex-col gap-1 w-[80%] mb-5">
+			<div className="flex gap-4 max-sm:flex-wrap">
+				<div className="flex flex-col gap-1 w-full sm:w-[80%] mb-5">
 					<label htmlFor="location">
 						<p className="font-semibold">Lure</p>
 						<p className="text-sm text-slate-600 mb-2">
@@ -186,7 +186,7 @@ export default function NewCatchPage({
 						required
 					/>
 				</div>
-				<div className="flex flex-col gap-1 w-[20%] mb-5">
+				<div className="flex flex-col gap-1 w-full sm:w-[20%] mb-5">
 					<label htmlFor="location">
 						<p className="font-semibold">Length</p>
 						<p className="text-sm text-slate-600 mb-2">In inches</p>
