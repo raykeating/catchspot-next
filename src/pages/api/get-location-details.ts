@@ -15,8 +15,6 @@ export default async function handler(
 
 		const url = `https://maps.googleapis.com/maps/api/place/details/json?fields=geometry&place_id=${placeId}&key=${process.env.GOOGLE_MAPS_API_KEY}`;
 
-		console.log(url);
-
 		const response = await fetch(url);
 
 		if (!response.ok) {
@@ -25,8 +23,6 @@ export default async function handler(
 		}
 
 		const data = await response.json();
-
-		console.log(data);
 
 		res.status(200).json({ data });
 	} else {

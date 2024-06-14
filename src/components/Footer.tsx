@@ -6,7 +6,7 @@ type Props = {};
 export default function Footer({}: Props) {
 	return (
 		<footer>
-			<div className="border-t-2 max-w-[1100px] mx-auto pb-20 pt-10 flex justify-between">
+			<div className="border-t-2 max-w-[1100px] mx-auto pb-20 pt-10 flex flex-col md:flex-row gap-8 md:gap-0 justify-between px-5">
 				<div className="flex flex-col gap-2">
 					<Link
 						className="font-black text-xl p-2 pt-0 rounded-lg hover:bg-slate-50 -translate-x-3 w-fit"
@@ -30,7 +30,7 @@ export default function Footer({}: Props) {
 						</a>
 					</div>
 				</div>
-                <div className="flex gap-20">
+                <div className="flex flex-wrap gap-8 md:gap-20">
                     <div className="flex flex-col gap-2">
                         <h4 className="font-bold text-lg">Resources</h4>
                         <a href="#" className="text-sm">

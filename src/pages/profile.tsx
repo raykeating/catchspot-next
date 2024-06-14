@@ -125,7 +125,7 @@ export default function Profile({ profile, myCatches, species }: Props) {
 						<div className="grid grid-cols-3 gap-10 mb-12">
 							{species.map((speciesItem: any) => {
 								return (
-									<div className="flex gap-4 items-center">
+									<div className="flex gap-4 items-center" key={speciesItem.id}>
 										<Image
 											src="/images/trout.jpg"
 											alt=""
@@ -153,7 +153,7 @@ export default function Profile({ profile, myCatches, species }: Props) {
 															className="text-slate-600 hover:underline"
 														>
 															Learn More{" "}
-															<i className="fa-solid fa-external-link text-[0.5rem] -translate-y-[0.1rem]"></i>
+															<i aria-hidden className="fa-solid fa-external-link text-[0.5rem] -translate-y-[0.1rem]"></i>
 														</Link>
 													</>
 												)}

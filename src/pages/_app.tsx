@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "react-hot-toast";
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider, signOut } from "next-auth/react";
 import Footer from "@/components/Footer";
 import { useRouter } from "next/router";
 
@@ -13,7 +13,10 @@ export default function App({
 	Component,
 	pageProps: { session, ...pageProps },
 }: AppProps) {
+
 	const router = useRouter();
+
+	console.log(session);
 
 	return (
 		<>

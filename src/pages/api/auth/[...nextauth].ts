@@ -12,6 +12,7 @@ const nextAuthOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
+
         const res = await fetch(
           process.env.NEXT_PUBLIC_STRAPI_API_URL + "/auth/local",
           {
@@ -59,6 +60,11 @@ const nextAuthOptions = {
         },
       );
       const user = await res.json();
+
+      if (user.error) {
+        throw new Error("User not found");
+      }
+
       // add user info to session
       session.user = user;
       session.strapiAccessToken = token.jwt;

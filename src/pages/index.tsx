@@ -10,7 +10,6 @@ type Props = {
 };
 
 export default function Home({ species, catches }: Props) {
-	console.log(catches);
 
 	const router = useRouter();
 	const [searchTerm, setSearchTerm] = useState("");
@@ -24,14 +23,14 @@ export default function Home({ species, catches }: Props) {
 
 	return (
 		<div className="mt-20">
-			<div className="max-w-[1100px] mx-auto">
-				<p className="font-black text-[3rem] rounded-lg text-center mt-64">
+			<div className="max-w-[1100px] mx-auto px-3">
+				<p className="font-black text-[2rem] md:text-[3rem] rounded-lg text-center mt-64">
 					Catch<span className="text-slate-500 font-black">Spot</span>
 				</p>
 				<p className="text-center text-xl text-slate-600 mb-6">
 					Share your catches with the world
 				</p>
-				<div className="flex gap-2 w-[34rem] mx-auto items-center">
+				<div className="flex gap-2 max-w-[34rem] w-full mx-auto items-center">
 					<div className="relative w-full">
 						<img
 							src="/icons/search.svg"
@@ -53,7 +52,7 @@ export default function Home({ species, catches }: Props) {
 					</div>
 					<Link
 						href={`/catches?searchTerm=${searchTerm}`}
-						className="btn secondary !border-slate-400 !py-2"
+						className="btn secondary !border-slate-400 !py-2 !px-3"
 					>
 						Search
 					</Link>
@@ -70,9 +69,9 @@ export default function Home({ species, catches }: Props) {
 						See what other anglers have been catching
 					</p>
 				</div>
-				<div className="flex gap-5 mb-4">
+				<div className="flex flex-col md:flex-row gap-5 mb-4">
 					{catches.map((catchItem: any) => {
-						return <VerticalCatchCard catchItem={catchItem} />;
+						return <VerticalCatchCard key={catchItem.id} catchItem={catchItem} />;
 					})}
 				</div>
 				<Link href="/catches" className="btn w-fit mb-24">
@@ -85,10 +84,10 @@ export default function Home({ species, catches }: Props) {
 							Learn about fish behavior, habitat, and more
 						</p>
 					</div>
-					<div className="flex flex-wrap gap-[5%]">
+					<div className="flex flex-col md:flex-row gap-5">
 						{species.map((speciesItem: any) => (
-							<div className="basis-[32%] mb-[2%] -mx-3" key={speciesItem.id}>
-								<SpeciesCard speciesItem={speciesItem} />
+							<div className="w-full mb-[2%] -mx-3" key={speciesItem.id}>
+								<SpeciesCard key={speciesItem.id} speciesItem={speciesItem} />
 							</div>
 						))}
 					</div>
@@ -97,9 +96,9 @@ export default function Home({ species, catches }: Props) {
 					</Link>
 				</div>
 				<p className="text-3xl font-semibold mb-6">About CatchSpot</p>
-				<div className="grid grid-cols-2 gap-x-24 gap-y-16 mb-32">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-16 mb-32">
 					<div>
-						<i className="fa-solid fa-house text-2xl mb-2"></i>
+						<i aria-hidden className="fa-solid fa-house text-2xl mb-2"></i>
 						<p className="text-xl mb-2">Subheading</p>
 						<p className="text-slate-600">
 							Body text for whatever you’d like to say. Add main takeaway
@@ -107,7 +106,7 @@ export default function Home({ species, catches }: Props) {
 						</p>
 					</div>
 					<div>
-						<i className="fa-solid fa-house text-2xl mb-2"></i>
+						<i aria-hidden className="fa-solid fa-house text-2xl mb-2"></i>
 						<p className="text-xl mb-2">Subheading</p>
 						<p className="text-slate-600">
 							Body text for whatever you’d like to say. Add main takeaway
@@ -115,7 +114,7 @@ export default function Home({ species, catches }: Props) {
 						</p>
 					</div>
 					<div>
-						<i className="fa-solid fa-house text-2xl mb-2"></i>
+						<i aria-hidden className="fa-solid fa-house text-2xl mb-2"></i>
 						<p className="text-xl mb-2">Subheading</p>
 						<p className="text-slate-600">
 							Body text for whatever you’d like to say. Add main takeaway
@@ -123,7 +122,7 @@ export default function Home({ species, catches }: Props) {
 						</p>
 					</div>
 					<div>
-						<i className="fa-solid fa-house text-2xl mb-2"></i>
+						<i aria-hidden className="fa-solid fa-house text-2xl mb-2"></i>
 						<p className="text-xl mb-2">Subheading</p>
 						<p className="text-slate-600">
 							Body text for whatever you’d like to say. Add main takeaway

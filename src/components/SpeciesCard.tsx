@@ -32,7 +32,7 @@ export default function SpeciesCard({ speciesItem }: Props) {
 					className="rounded-lg object-cover w-full h-48 mb-4"
 				/>
 				<p className="flex items-center gap-2 font-semibold">
-					Learn more <i className="fas fa-external-link text-xs"></i>
+					Learn more <i aria-hidden className="fas fa-external-link text-xs"></i>
 				</p>
 			</div>
 		</Link>

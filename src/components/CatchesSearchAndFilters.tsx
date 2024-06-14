@@ -6,7 +6,7 @@ type Props = {
 	setSearchTerm: (searchTerm: string) => void;
 	filters: { species: string; myCatches: string };
 	setFilters: (filters: { species: string; myCatches: string }) => void;
-	species: string[];
+	species: any[];
 };
 
 export default function CatchesSearchAndFilters({
@@ -41,8 +41,8 @@ export default function CatchesSearchAndFilters({
 					<select className="block appearance-none w-full bg-white border px-4 py-2 pr-8 rounded-lg focus:outline-none focus:shadow-outline" onChange={(e) => setFilters({ ...filters, species: e.target.value })}>
 						<option value="">All Species</option>
 						{
-							species.map((speciesName) => (
-								<option key={speciesName} value={speciesName}>{speciesName}</option>
+							species.map((species) => (
+								<option key={species.id} value={species.attributes.name}>{species.attributes.name}</option>
 							))
 						}
 					</select>

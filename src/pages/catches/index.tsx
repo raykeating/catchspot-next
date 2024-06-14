@@ -117,7 +117,7 @@ export default function Catches({ initialCatches, species }: Props) {
 				setSearchTerm={setSearchTerm}
 				filters={filters}
 				setFilters={setFilters}
-				species={species.map((s: any) => s.attributes.name)}
+				species={species}
 			/>
 			<div className="border w-full flex h-full overflow-x-hidden">
 				<div
