@@ -83,15 +83,15 @@ export default function IndividualCatchPage({
 	return (
 		<div className="max-w-[1100px] mx-auto px-4 mt-36 flex flex-col gap-12">
             <Link href="/catches" className="-mb-4 px-3 py-1 rounded-lg hover:bg-slate-50 -translate-x-1 transition-all w-fit"><i className="fa-solid fa-angle-left mr-3"></i>All Catches</Link>
-			<div className="flex gap-12 max-h-[360px] w-full">
+			<div className="flex max-md:flex-col-reverse gap-12 md:max-h-[360px] w-full">
 				<Image
 					src={imageSrc}
 					alt=""
 					width={800}
 					height={800}
-					className="rounded-xl object-cover w-[50%] max-h-[360px]"
+					className="rounded-xl object-cover w-full md:w-[50%] max-h-[360px]"
 				/>
-				<div className="flex flex-col w-[50%]">
+				<div className="flex flex-col w-full md:w-[50%]">
 					<div className="flex gap-3 items-center mb-8">
 						<Image
 							src={anglerImageSrc}
@@ -139,7 +139,7 @@ export default function IndividualCatchPage({
 					<p className="text-2xl font-semibold">Other Catches</p>
 					<p className="text-slate-500">More Brown Trout</p>
 				</div>
-				<div className="flex gap-5 mb-24">
+				<div className="flex flex-col md:flex-row gap-5 mb-24">
 					{featuredCatches.map((catchItem: any) => {
 						return (
 							<VerticalCatchCard
