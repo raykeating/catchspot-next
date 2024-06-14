@@ -48,8 +48,8 @@ export default function Signup({}: Props) {
 	}
 
 	return (
-		<div className="flex mt-24 items-center justify-center">
-			<div className="flex flex-col items-center w-[600px] mt-8 mb-12">
+		<div className="flex mt-24 items-center justify-center px-4">
+			<div className="flex flex-col items-center max-w-[600px] w-full mt-8 mb-12">
 				<h1 className="text-xl font-bold">Create an Account</h1>
 				<p className="text-slate-600 font-light text-lg mb-8">
 					Share your catches with the world
@@ -84,7 +84,7 @@ export default function Signup({}: Props) {
 							required
 						/>
 					</div>
-					<div className="flex gap-6 w-full mb-5">
+					<div className="flex max-md:flex-col gap-6 w-full mb-5">
 						<div className="flex flex-col gap-1 w-full">
 							<label htmlFor="firstName">First name</label>
 							<input
