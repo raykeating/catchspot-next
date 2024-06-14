@@ -19,7 +19,7 @@ export default function CatchesSearchAndFilters({
 	return (
 		<div className="w-full pt-[5rem]">
 			<div className="p-6 bg-slate-50 flex gap-3">
-				<div className="relative w-full">
+				<div className="relative w-full max-md:text-sm">
 					<img
 						src="/icons/search.svg"
 						alt="search"
@@ -37,7 +37,7 @@ export default function CatchesSearchAndFilters({
 						onChange={(e) => setSearchTerm(e.target.value)}
 					/>
 				</div>
-				<div className="relative inline-block w-64">
+				<div className="relative hidden md:inline-block w-64">
 					<select className="block appearance-none w-full bg-white border px-4 py-2 pr-8 rounded-lg focus:outline-none focus:shadow-outline" onChange={(e) => setFilters({ ...filters, species: e.target.value })}>
 						<option value="">All Species</option>
 						{
@@ -56,8 +56,8 @@ export default function CatchesSearchAndFilters({
 						</svg>
 					</div>
 				</div>
-				<div className="relative inline-block w-64">
-					<select className="block appearance-none w-full bg-white border px-4 py-2 pr-8 rounded-lg focus:outline-none focus:shadow-outline" onChange={(e) => setFilters({ ...filters, myCatches: e.target.value })}>
+				<div className="relative inline-block w-40 md:w-64 max-md:text-sm">
+					<select className="block appearance-none w-full bg-white border px-2 md:px-4 py-2 pr-8 rounded-lg focus:outline-none focus:shadow-outline" onChange={(e) => setFilters({ ...filters, myCatches: e.target.value })}>
 						<option value="false">All Anglers</option>
 						<option value="true">My Catches</option>
 					</select>

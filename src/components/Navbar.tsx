@@ -30,7 +30,7 @@ export default function Navbar({}: Props) {
 		}, 750);
 	};
 
-	const [isOpen, setIsOpen] = useState(true);
+	const [isOpen, setIsOpen] = useState(false);
 
 	return (
 		<nav className="flex w-full justify-between items-center px-12 py-4 shadow fixed top-0 z-50 bg-slate-50 md:bg-white h-20">

@@ -121,7 +121,7 @@ export default function Catches({ initialCatches, species }: Props) {
 			/>
 			<div className="border w-full flex h-full overflow-x-hidden">
 				<div
-					className="flex flex-col overflow-y-scroll shrink-0 min-w-[502px]"
+					className="flex flex-col overflow-y-scroll shrink-0 w-full md:w-[502px]"
 					ref={listContainer}
 				>
 					{catches.map((catchItem: any) => (
@@ -144,7 +144,7 @@ export default function Catches({ initialCatches, species }: Props) {
 						</div>
 					)}
 				</div>
-				<div className="w-full h-full relative overflow-hidden">
+				<div className="w-full h-full relative overflow-hidden hidden lg:block">
 					<CatchMap mapRef={mapRef} />
 				</div>
 			</div>

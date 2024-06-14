@@ -14,15 +14,15 @@ export default function CatchCard({ catchItem, onClick }: Props) {
 		parseCatchData(catchItem);
 
 	return (
-		<button className="flex items-center p-6 pr-12 gap-6 hover:bg-slate-50 cursor-pointer transition-colors text-start w-full" onClick={onClick}>
+		<button className="flex items-center p-6 pr-12 gap-6 hover:bg-slate-50 cursor-pointer transition-colors text-start w-full border-b" onClick={onClick}>
 			<Image
 				src={imageSrc}
 				alt=""
 				width={200}
 				height={256}
-				className="rounded-xl object-cover w-48 h-40"
+				className="rounded-xl object-cover hidden sm:block sm:w-36 sm:h-32 md:w-48 md:h-40"
 			/>
-			<div className="flex flex-col">
+			<div className="flex flex-col w-full sm:w-[60%]">
 				<p className="font-semibold">{speciesName}</p>
 				<p className="mb-3 truncate max-w-48">{locationName}</p>
 				<div className="flex gap-2 mb-3">
@@ -35,7 +35,7 @@ export default function CatchCard({ catchItem, onClick }: Props) {
 					/>
 					<p>{anglerName}</p>
 				</div>
-				<p className="text-slate-500 mb-3">
+				<p className="text-slate-500 mb-3 hidden md:block">
 					{length}" <span className="font-thin">•</span> {lureName}
 				</p>
 				<div className="flex flex-col gap-5 text-sm">
