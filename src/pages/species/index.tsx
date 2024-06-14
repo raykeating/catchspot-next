@@ -33,12 +33,12 @@ export default function Species({ initialSpecies }: Props) {
 	}, [listContainer]);
 
 	return (
-		<div className="max-w-[1100px] mx-auto mt-36">
+		<div className="max-w-[1100px] mx-auto mt-36 px-5">
 			<h1 className="text-3xl font-bold">Species</h1>
 			<h2 className="text-lg italic text-slate-600 mb-8">
 				Learn about fish behavior, habitat, and see recent catches
 			</h2>
-			<div className="w-full flex gap-3 mb-8">
+			<div className="w-full flex max-md:flex-col gap-3 mb-8">
 				<div className="relative w-full">
 					<img
 						src="/icons/search.svg"
@@ -58,7 +58,7 @@ export default function Species({ initialSpecies }: Props) {
 					/>
 				</div>
 				{/* Search and filters */}
-				<div className="relative inline-block w-64">
+				<div className="relative inline-block w-full md:w-64">
 					<select
 						className="block appearance-none w-full bg-white border px-4 py-2 pr-8 rounded-lg focus:outline-none focus:shadow-outline"
 						onChange={(e) =>
@@ -80,9 +80,9 @@ export default function Species({ initialSpecies }: Props) {
 					</div>
 				</div>
 			</div>
-			<div className="flex flex-wrap gap-[2%] -mx-1" ref={listContainer}>
+			<div className="flex flex-wrap gap-[2%] -mx-1 mb-8" ref={listContainer}>
 				{species.map((speciesItem: any) => (
-					<div className="basis-[32%] mb-[2%]" key={speciesItem.id}>
+					<div className="w-full md:basis-[32%] mb-[2%]" key={speciesItem.id}>
 						<SpeciesCard speciesItem={speciesItem} />
 					</div>
 				))}
