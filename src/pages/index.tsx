@@ -149,7 +149,7 @@ export async function getServerSideProps() {
 	const species = await speciesRes.json();
 
 	const catchesRes = await fetch(
-		`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/catches?pagination[page]=1&pagination[pageSize]=3&populate=angler.profilePicture,species,location,lure,image`
+		`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/catches?pagination[page]=1&pagination[pageSize]=3&populate=angler.profilePicture,species,location,lure,image&sort=id:desc`
 	);
 	const catches = await catchesRes.json();
 
