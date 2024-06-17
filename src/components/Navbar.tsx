@@ -107,7 +107,7 @@ export default function Navbar({}: Props) {
 								alt="Profile Picture"
 								width={70}
 								height={70}
-								className="rounded-full w-[3rem] h-[3rem] aspect-square shadow hover:scale-105 transition-transform"
+								className="rounded-full w-[3rem] h-[3rem] aspect-square shadow hover:scale-105 transition-transform object-cover"
 							/>
 						</Link>
 					</div>
